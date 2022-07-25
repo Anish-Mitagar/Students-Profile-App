@@ -13,7 +13,7 @@ const LoginScreen = () => {
 
     useEffect(() => {
         if(localStorage.getItem("authToken")) {
-            navigate("/")
+            navigate("/userprofile")
         }
     }, [navigate]); //might need to comment out navigate
 
@@ -35,7 +35,7 @@ const LoginScreen = () => {
 
             localStorage.setItem("authToken", data.token);
 
-            navigate("/")
+            navigate("/userprofile")
         } catch (error) {
             setError(error.response.data.error);
             setTimeout(() => {

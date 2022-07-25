@@ -16,7 +16,7 @@ exports.getProfileData = async (req, res, next) => {
                 userProfile: {
                     "firstname": "Need First Name",
                     "lastname": "Need Last Name",
-                    "email": "Anish.S.Mitagar@gmail.com",
+                    "email": email,
                     "major1": "Need Major",
                     "major2": "None",
                     "minor": "None",
