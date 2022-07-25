@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import "./RegisterScreen.css";
 import { useNavigate } from 'react-router-dom';
 
-const RegisterScreen = ( {history} ) => {
+const RegisterScreen = () => {
 
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
@@ -16,10 +16,9 @@ const RegisterScreen = ( {history} ) => {
 
     useEffect(() => {
         if(localStorage.getItem("authToken")) {
-            //history.push("/");
             navigate("/")
         }
-    }, [/*history*/]);
+    }, [navigate]); //might need to comment out navigate
 
     const registerHandler = async (e) => {
         e.preventDefault();
@@ -48,7 +47,6 @@ const RegisterScreen = ( {history} ) => {
 
             localStorage.setItem("authToken", data.token);
 
-            //history.push("/");
             navigate("/");
         } catch (error) {
             setError(error.response.data.error);
