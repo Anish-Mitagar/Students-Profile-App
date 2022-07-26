@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
-const SetUserProfileScreen = () => {
+const SetUserProfileScreen = ( {editing} ) => {
 
     const [error, setError] = useState("");
     const [privateData, setPrivateData] = useState({});
@@ -57,8 +57,34 @@ const SetUserProfileScreen = () => {
             }
         }
 
+        const uploadProfile = async () => {
+            const config = {
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${localStorage.getItem("authToken")}`
+                }
+            }
+
+            if (editing) {
+                const {data} = await axios.get("/api/private/profile", config);
+                console.log(data)
+                setFname(data.userProfile.firstname);
+                setLname(data.userProfile.lastname);
+                setMajor(data.userProfile.major1);
+                setMajor2(data.userProfile.major2)
+                setMinor(data.userProfile.minor)
+                setGpa(data.userProfile.gpa)
+                setYear(data.userProfile.year);
+                setClasses(data.userProfile.classes.join());
+                setTutor(data.userProfile.istutor);
+                setTutorRating(data.userProfile.tutorrating);
+                setInterests(data.userProfile.interests.join());
+            }
+        }
+
         fetchPrivateData();
-    }, [navigate]); //might need to comment out navigate
+        uploadProfile();
+    }, []); //might need to comment out navigate
 
 
     useEffect(() => {
@@ -101,8 +127,30 @@ const SetUserProfileScreen = () => {
                 setError("You are not authorized please login");
             }
         }
-        uploadProfileData();
-        navigate("/userprofile")
+
+        const updateProfileData = async () => {
+            const config = {
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${localStorage.getItem("authToken")}`
+                }
+            }
+
+            try {
+                await axios.patch("/api/private/updateprofile", profile, config);
+                
+            } catch (error) {
+                console.log(error)
+                localStorage.removeItem("authToken");
+                setError("You are not authorized please login");
+            }
+        }
+        if (editing){
+            updateProfileData();
+        } else {
+            uploadProfileData();
+        }
+        navigate("/userprofile");
     }
 
     return error ? (

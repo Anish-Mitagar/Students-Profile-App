@@ -70,9 +70,11 @@ exports.updateProfile = async (req, res, next) => {
 
     if (toBeUpdatedFields.hasOwnProperty("email")){
         const updatedEmail = toBeUpdatedFields.email
-        const alreadyExists = await UserProfile.findOne({ updatedEmail });
-        if (alreadyExists) {
-            return next(new ErrorResponse("Another account already uses this email!", 500));
+        if (updatedEmail !== email) {
+            const alreadyExists = await UserProfile.findOne({ updatedEmail });
+            if (alreadyExists) {
+                return next(new ErrorResponse("Another account already uses this email!", 500));
+            }
         }
     }
 

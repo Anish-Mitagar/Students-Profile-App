@@ -24,8 +24,9 @@ const App2 = () => {
           <Route path="/forgotpassword" element={<ForgotPasswordScreen/>}/>
           <Route path="/passwordreset/:resetToken" element={<ResetPasswordScreen/>}/> 
           <Route path="/userprofile" element={<UserProfileScreen/>}/>
-          <Route path="/editprofile" element={<SetUserProfileScreen/>}/>
+          <Route path="/setprofile" element={<SetUserProfileScreen editing = {false}/>}/>
           <Route path="/repo" element={<StudentsRepoScreen/>}/>
+          <Route path="/editprofile" element={<SetUserProfileScreen editing = {true}/>}/>
         </Routes>
       </div>
     </BrowserRouter>
