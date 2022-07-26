@@ -33,7 +33,7 @@ const UserProfileScreen = () => {
         }
 
         fetchPrivateData();
-    }, [navigate]); //might need to comment out navigate
+    }, []); //might need to comment out navigate
 
 
     return (
@@ -45,7 +45,7 @@ const UserProfileScreen = () => {
             </header>
             <p>{privateUserProfileData.firstname}</p>
             <p>{privateUserProfileData.lastname}</p>
-            <p>{privateUserProfileData.major}</p>
+            <p>{privateUserProfileData.major1}</p>
             <p>{privateUserProfileData.gpa}</p>
             <p>{privateUserProfileData.year}</p>
             <Link to="/repo">Go to Repo</Link>

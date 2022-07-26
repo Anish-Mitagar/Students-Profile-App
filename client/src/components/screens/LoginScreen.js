@@ -15,7 +15,7 @@ const LoginScreen = () => {
         if(localStorage.getItem("authToken")) {
             navigate("/userprofile")
         }
-    }, [navigate]); //might need to comment out navigate
+    }, []); //might need to comment out navigate
 
     const loginHandler = async (e) => {
         e.preventDefault();

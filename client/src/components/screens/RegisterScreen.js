@@ -18,7 +18,7 @@ const RegisterScreen = () => {
         if(localStorage.getItem("authToken")) {
             navigate("/")
         }
-    }, [navigate]); //might need to comment out navigate
+    }, []); //might need to comment out navigate
 
     const registerHandler = async (e) => {
         e.preventDefault();

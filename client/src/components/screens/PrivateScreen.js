@@ -31,7 +31,7 @@ const PrivateScreen = () => {
         }
 
         fetchPrivateData();
-    }, [navigate]); //might need to comment out navigate
+    }, []); //might need to comment out navigate
 
     const logoutHandler = () => {
         localStorage.removeItem("authToken");
