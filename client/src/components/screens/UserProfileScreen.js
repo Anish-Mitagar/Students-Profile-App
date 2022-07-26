@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 
 const UserProfileScreen = () => {
     const [error, setError] = useState("");
@@ -39,7 +39,7 @@ const UserProfileScreen = () => {
     return (
         <div>
             {error && <span className="error-message">{error}</span>}
-            {!hasProfile && <span><div><p>Need to Make Profile!</p> <button>Make Profile</button></div></span>}
+            {!hasProfile && <span><div><p>Need to Make Profile!</p> <Link to="/editprofile">Make Profile</Link></div></span>}
             <header>
                 <h1>UserProfileScreen!</h1>
             </header>
@@ -48,7 +48,7 @@ const UserProfileScreen = () => {
             <p>{privateUserProfileData.major}</p>
             <p>{privateUserProfileData.gpa}</p>
             <p>{privateUserProfileData.year}</p>
-            <button>Go to Repo</button>
+            <Link to="/repo">Go to Repo</Link>
         </div>
     )
 }
