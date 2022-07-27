@@ -4,19 +4,19 @@ let queryHelper = {
         finalFilters = {}
 
         if (filters["first_name"] !== "None") {
-            finalFilters["first_name"] = filters["first_name"]
+            finalFilters["firstname"] = filters["first_name"]
         }
 
         if (filters["last_name"] !== "None") {
-            finalFilters["last_name"] = filters["last_name"]
+            finalFilters["lastname"] = filters["last_name"]
         }
 
         if (filters.hasOwnProperty("tutor_rating") && parseInt(filters["tutor_rating"]) !== 0) {
-            finalFilters["tutor rating"] = {"$gte": parseInt(filters["tutor_rating"])}
+            finalFilters["tutorrating"] = {"$gte": parseInt(filters["tutor_rating"])}
         }
 
         if (filters["major"] !== "None") {
-            finalFilters["major 1"] = filters["major"]
+            finalFilters["major1"] = filters["major"]
         }
 
         if (filters["year"] !== "None") {

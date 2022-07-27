@@ -32,7 +32,8 @@ const UserProfileSchema = new mongoose.Schema({
     },
     gpa: {
         type: Number,
-        required: [true, "Must have a GPA"]
+        required: [true, "Must have a GPA"],
+        default: 0.0
     },
     year: {
         type: String,
