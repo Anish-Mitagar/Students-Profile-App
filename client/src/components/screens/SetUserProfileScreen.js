@@ -15,7 +15,7 @@ const SetUserProfileScreen = ( {editing} ) => {
     const [year, setYear] = useState("None")
     const [classes, setClasses] = useState("")
     const [tutor, setTutor] = useState(false)
-    const [tutorRating, setTutorRating] = useState(0)
+    const [tutorRating, setTutorRating] = useState(0.0)
     const [interests, setInterests] = useState("")
     const [profile, setProfile] = useState({
         "firstname": fName,
@@ -231,7 +231,7 @@ const SetUserProfileScreen = ( {editing} ) => {
                 <br></br>
                 <label>GPA</label>
                 <br></br>
-                <input type='number' min={0} max={4} value={gpa} onChange={(e) => setGpa(parseInt(e.target.value))}></input>
+                <input type='number' min={0.00} max={4.00} step={0.01} value={gpa} onChange={(e) => setGpa(parseFloat(e.target.value).toFixed(2))}></input>
                 <br></br>
                 <br></br>
                 <label>Year</label>
@@ -260,7 +260,7 @@ const SetUserProfileScreen = ( {editing} ) => {
                 <br></br>
                 <label>Tutor Rating</label>
                 <br></br>
-                <input type='number' min={0} max={10} value={tutorRating} onChange={(e) => setTutorRating(parseInt(e.target.value))}></input>
+                <input type='number' min={0.00} max={10.00} step={0.01} value={tutorRating} onChange={(e) => setTutorRating(parseFloat(e.target.value).toFixed(2))}></input>
                 <br></br>
                 <br></br>
                 <label>Interests</label>

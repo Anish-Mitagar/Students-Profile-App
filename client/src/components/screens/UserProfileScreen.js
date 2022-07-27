@@ -47,8 +47,11 @@ const UserProfileScreen = () => {
             <p>{privateUserProfileData.firstname}</p>
             <p>{privateUserProfileData.lastname}</p>
             <p>{privateUserProfileData.major1}</p>
+            <p>{privateUserProfileData.major2}</p>
+            <p>{privateUserProfileData.minor}</p>
             <p>{privateUserProfileData.gpa}</p>
             <p>{privateUserProfileData.year}</p>
+            <p>{privateUserProfileData.tutorrating}</p>
             <Link to="/repo">Go to Repo</Link>
         </div>
     )
