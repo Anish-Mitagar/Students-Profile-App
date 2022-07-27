@@ -79,9 +79,9 @@ export const StudentFilters = ( {setFilter} ) => {
                 <br></br>
                 <select onChange={(e) => setOrder(e.target.value)} value = {order}>
                     <option value="">None</option>
-                    <option value="first_name">First Name</option>
-                    <option value="last_name">Last Name</option>
-                    <option value="tutor rating">Tutor Rating</option>
+                    <option value="firstname">First Name</option>
+                    <option value="lastname">Last Name</option>
+                    <option value="tutorrating">Tutor Rating</option>
                     <option value="gpa">GPA</option>
                 </select>
                 <select onChange={(e) => setOrder2(e.target.value)} value = {order2}>

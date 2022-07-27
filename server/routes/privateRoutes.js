@@ -12,4 +12,6 @@ router.route("/createprofile").post(protect, createProfile);
 
 router.route("/updateprofile").patch(protect, updateProfile);
 
+router.use("/repo", require("./repoRoutes"));
+
 module.exports = router;
