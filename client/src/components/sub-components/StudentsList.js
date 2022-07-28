@@ -2,12 +2,12 @@ import React from 'react'
 import { StudentBlock } from './StudentBlock'
 
 
-export const StudentsList = ( {students, pageNum} ) => {
+export const StudentsList = ( {students, pageNum, email, role} ) => {
 
     return (
         <div>
             {students.map((student) => (
-                <StudentBlock key={student._id} student = {student}/>
+                <StudentBlock key={student._id} student = {student} email = {email} role = {role}/>
             ))}
             <h1>{pageNum}</h1>
         </div>

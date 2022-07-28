@@ -9,7 +9,8 @@ const StudentsRepoScreen = () => {
 
   const [error, setError] = useState("");
   const [privateData, setPrivateData] = useState({});
-  const [students, setStudents] = useState([])
+  const [students, setStudents] = useState([]);
+  const [privateUserProfileData, setPrivateUserProfileData] = useState({});
 
   const [filters, setFilters] = useState({
     first_name: "",
@@ -47,6 +48,24 @@ const StudentsRepoScreen = () => {
       }
     }
 
+    const fetchProfileData = async () => {
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("authToken")}`
+        }
+      }
+
+      try {
+        const {data} = await axios.get("/api/private/profile", config);  
+        setPrivateUserProfileData(data.userProfile);
+        console.log(data.userProfile)
+      } catch (error) {
+        localStorage.removeItem("authToken");
+        setError("You are not authorized please login");
+      }
+    }
+
     const getUsers = async () => {
       const users = await getFilteredUsers(pageNum, "None", "None", 0, "None", "None", "None", "None")
       console.log(users)
@@ -54,6 +73,7 @@ const StudentsRepoScreen = () => {
     }
 
     fetchPrivateData();
+    fetchProfileData();
     getUsers()
   }, [])
 
@@ -103,7 +123,7 @@ const StudentsRepoScreen = () => {
     <div>
       {error && <span className="error-message">{error}</span>}
       <StudentFilters setFilter={setFilter} />
-      <StudentsList students={students} pageNum={pageNum} />
+      <StudentsList students={students} pageNum={pageNum} email = {privateData.email} role = {privateUserProfileData.role}/>
       <StudentsPagination setPageNumber={setPageNumber} />
     </div>
   )
