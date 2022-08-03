@@ -6,12 +6,12 @@ const { protect } = require('../middleware/authMiddleware');
 
 router.route("/").get(protect, getPrivateData);
 
-router.route("/profile").get(protect, getProfileData);
-
-router.route("/createprofile").post(protect, createProfile);
-
-router.route("/updateprofile").patch(protect, updateProfile);
+router.route("/profile").get(protect, getProfileData)
+                        .post(protect, createProfile)
+                        .patch(protect, updateProfile);
 
 router.use("/repo", require("./repoRoutes"));
+
+router.use("/admin", require("./adminRoutes"));
 
 module.exports = router;

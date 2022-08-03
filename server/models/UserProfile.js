@@ -64,6 +64,11 @@ const UserProfileSchema = new mongoose.Schema({
         required: [true, "Must have a flag"],
         default: false
     },
+    role: {
+        type: String,
+        required: [true, "Please provide role"],
+        default: "USER"
+    }
 });
 
 const UserProfile = mongoose.model("User_Profile", UserProfileSchema);

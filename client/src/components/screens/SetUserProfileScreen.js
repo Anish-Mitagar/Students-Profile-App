@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 
-const SetUserProfileScreen = ( {editing} ) => {
+const SetUserProfileScreen = ( {editing, admin} ) => {
 
+    const location = useLocation();
+    const data2 = location.state;
     const [error, setError] = useState("");
     const [privateData, setPrivateData] = useState({});
     const [fName, setFname] = useState("")
@@ -20,7 +22,7 @@ const SetUserProfileScreen = ( {editing} ) => {
     const [profile, setProfile] = useState({
         "firstname": fName,
         "lastname": lName,
-        "email": privateData.email,
+        "email": admin ? data2.email : privateData.email,
         "major1": major,
         "major2": major2,
         "minor": minor,
@@ -66,24 +68,41 @@ const SetUserProfileScreen = ( {editing} ) => {
             }
 
             if (editing) {
-                const {data} = await axios.get("/api/private/profile", config);
-                console.log(data)
-                setFname(data.userProfile.firstname);
-                setLname(data.userProfile.lastname);
-                setMajor(data.userProfile.major1);
-                setMajor2(data.userProfile.major2)
-                setMinor(data.userProfile.minor)
-                setGpa(data.userProfile.gpa)
-                setYear(data.userProfile.year);
-                setClasses(data.userProfile.classes.join());
-                setTutor(data.userProfile.istutor);
-                setTutorRating(data.userProfile.tutorrating);
-                setInterests(data.userProfile.interests.join());
+                if (admin) {
+                    const {data} = await axios.get(`/api/private/admin/useprofile/${data2.email}`, config);
+                    console.log(data)
+                    setFname(data.userProfile.firstname);
+                    setLname(data.userProfile.lastname);
+                    setMajor(data.userProfile.major1);
+                    setMajor2(data.userProfile.major2)
+                    setMinor(data.userProfile.minor)
+                    setGpa(data.userProfile.gpa)
+                    setYear(data.userProfile.year);
+                    setClasses(data.userProfile.classes.join());
+                    setTutor(data.userProfile.istutor);
+                    setTutorRating(data.userProfile.tutorrating);
+                    setInterests(data.userProfile.interests.join());
+                } else {
+                    const {data} = await axios.get("/api/private/profile", config);
+                    console.log(data)
+                    setFname(data.userProfile.firstname);
+                    setLname(data.userProfile.lastname);
+                    setMajor(data.userProfile.major1);
+                    setMajor2(data.userProfile.major2)
+                    setMinor(data.userProfile.minor)
+                    setGpa(data.userProfile.gpa)
+                    setYear(data.userProfile.year);
+                    setClasses(data.userProfile.classes.join());
+                    setTutor(data.userProfile.istutor);
+                    setTutorRating(data.userProfile.tutorrating);
+                    setInterests(data.userProfile.interests.join());
+                }
             }
         }
 
         fetchPrivateData();
         uploadProfile();
+        //console.log(data2.email);
     }, []); //might need to comment out navigate
 
 
@@ -91,7 +110,7 @@ const SetUserProfileScreen = ( {editing} ) => {
         setProfile({
             "firstname": fName,
             "lastname": lName,
-            "email": privateData.email,
+            "email": admin ? data2.email : privateData.email,
             "major1": major,
             "major2": major2,
             "minor": minor,
@@ -119,7 +138,7 @@ const SetUserProfileScreen = ( {editing} ) => {
             }
 
             try {
-                await axios.post("/api/private/createprofile", profile, config);
+                await axios.post("/api/private/profile", profile, config); //was createprofile
 
             } catch (error) {
                 console.log(error)
@@ -137,10 +156,16 @@ const SetUserProfileScreen = ( {editing} ) => {
             }
 
             try {
-                await axios.patch("/api/private/updateprofile", profile, config);
+                if (admin) {
+                    console.log(`/api/private/admin/useprofile/${data2.email}`)
+                    await axios.patch(`/api/private/admin/useprofile/${data2.email}`, profile, config);
+                } else {
+                    await axios.patch("/api/private/profile", profile, config); //was updateprofile
+                }
                 
             } catch (error) {
                 console.log(error)
+                console.log(error.message)
                 localStorage.removeItem("authToken");
                 setError("You are not authorized please login");
             }
@@ -150,7 +175,7 @@ const SetUserProfileScreen = ( {editing} ) => {
         } else {
             uploadProfileData();
         }
-        navigate("/userprofile");
+        navigate("/repo");
     }
 
     return error ? (

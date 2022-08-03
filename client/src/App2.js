@@ -24,9 +24,10 @@ const App2 = () => {
           <Route path="/forgotpassword" element={<ForgotPasswordScreen/>}/>
           <Route path="/passwordreset/:resetToken" element={<ResetPasswordScreen/>}/> 
           <Route path="/userprofile" element={<UserProfileScreen/>}/>
-          <Route path="/setprofile" element={<SetUserProfileScreen editing = {false}/>}/>
+          <Route path="/setprofile" element={<SetUserProfileScreen editing = {false} admin = {false}/>}/>
           <Route path="/repo" element={<StudentsRepoScreen/>}/>
-          <Route path="/editprofile" element={<SetUserProfileScreen editing = {true}/>}/>
+          <Route path="/editprofile" element={<SetUserProfileScreen editing = {true} admin = {false}/>}/>
+          <Route path="/editprofile-admin" element={<SetUserProfileScreen editing = {true} admin = {true}/>}/>
         </Routes>
       </div>
     </BrowserRouter>

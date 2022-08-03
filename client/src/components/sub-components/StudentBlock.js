@@ -5,7 +5,8 @@ export const StudentBlock = ( {student, email, role} ) => {
   return (
     <div>
         <h1>{student.firstname} {student.lastname} </h1>
-        {(email === student.email || role === "ADMIN") && <span><div> <Link to="/">Edit</Link></div></span>}
+        {(email === student.email) && <span><div> <Link to="/editprofile">Edit</Link></div></span>}
+        {(email !== student.email && role === "ADMIN") && <span><div> <Link to="/editprofile-admin" state = {{email: student.email}}>Edit</Link></div></span>}
         <h2>Major: {student.major1}</h2>
         <h3>Second Major: {student.major2}</h3>
         <h3>Minor: {student.minor}</h3>

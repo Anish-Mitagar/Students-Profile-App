@@ -91,6 +91,38 @@ exports.updateProfile = async (req, res, next) => {
         });
     } catch (error) {
         console.log(error.message)
-        return next(new ErrorResponse("Unable to create Account Profile", 500));
+        return next(new ErrorResponse("Unable to update Account Profile", 500));
     }
+}
+
+exports.isAdminProfile = async (req, res, next) => {
+    const user = req.user
+    const email = user.email
+
+    try {
+        const userProfile = await UserProfile.findOne({ email });
+
+        if (!userProfile) {
+            res.status(500).json({
+                success: false,
+                msg: "No Such Profile Exists",
+                isAdmin: false
+            });
+        }
+        else if (userProfile.role !== "ADMIN"){
+            res.status(200).json({
+                success: false,
+                msg: "Not an admin!",
+                isAdmin: false
+            });
+        }
+        else {
+            next()
+        }
+
+    } catch (error) {
+        console.log(error.message)
+        return next(new ErrorResponse("Unable to retrieve Account Profile", 500));
+    }
+
 }
