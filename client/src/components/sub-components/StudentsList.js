@@ -9,7 +9,7 @@ export const StudentsList = ( {students, pageNum, email, role} ) => {
             {students.map((student) => (
                 <StudentBlock key={student._id} student = {student} email = {email} role = {role}/>
             ))}
-            <h1>{pageNum}</h1>
+            
         </div>
     )
 }

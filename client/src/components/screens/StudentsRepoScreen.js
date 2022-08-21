@@ -4,6 +4,7 @@ import { StudentsList } from '../sub-components/StudentsList'
 import { StudentFilters } from '../sub-components/StudentFilters'
 import { StudentsPagination } from '../sub-components/StudentsPagination'
 import { useNavigate } from 'react-router-dom';
+import '../styles/StudentsRepoScreen.css'
 
 const StudentsRepoScreen = () => {
 
@@ -120,11 +121,18 @@ const StudentsRepoScreen = () => {
   }, [filters.first_name, filters.last_name, filters.major, filters.tutor_rating, filters.year, filters.order, filters.order2, pageNum])
 
   return (
-    <div>
+    <div className='repoContainer'>
+      <div className='filterContainer'>
+        <div className='filterBox'>
+          <StudentFilters setFilter={setFilter} />
+        </div>
+      </div>
+      <div className='listContainer'>
+        <StudentsList students={students} pageNum={pageNum} email = {privateData.email} role = {privateUserProfileData.role}/>
+        <StudentsPagination setPageNumber={setPageNumber} />
+      </div>
       {error && <span className="error-message">{error}</span>}
-      <StudentFilters setFilter={setFilter} />
-      <StudentsList students={students} pageNum={pageNum} email = {privateData.email} role = {privateUserProfileData.role}/>
-      <StudentsPagination setPageNumber={setPageNumber} />
+      
     </div>
   )
 }

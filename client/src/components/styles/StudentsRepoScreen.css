@@ -1,0 +1,53 @@
+.repoContainer {
+    background-color: blue;
+    margin: auto;
+    width: 100%;
+    display: flex;
+}
+
+.filterContainer {
+    background-color: antiquewhite;
+    margin-right: 0;
+    width: 20%;
+    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 0%;
+}
+
+.filterBox {
+    border: solid black;
+    padding: 3%;
+    border-radius: 15px;
+}
+
+.listContainer {
+    background-color: greenyellow;
+    margin-left: 0;
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.profileContainer {
+    width: 100%;
+    margin: auto;
+    border: solid black;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.minibox {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.minibox h1, h2, h3, span {
+    padding-left: 20px;
+    padding-right: 20px;
+}
